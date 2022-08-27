@@ -1,0 +1,67 @@
+.company-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  .mat-form-field {
+    width: 30%;
+    &:nth-child(1) {
+      margin-right: 15px;
+    }
+  }
+}
+
+.btn-actions {
+  width: 29%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-actions button:nth-child(1) {
+  margin-right:10px;
+}
+
+.companies-table {
+  margin-top: 40px;
+}
+
+table {
+  width: 100%;
+  border-radius: 5em;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
+  justify-content: center;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#editbtn {
+  color: #4527A0;
+}
+
+#deletebtn {
+  color: #F44336;
+}
+
+#visibilitybtn {
+  color: #009688;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 12px !important;
+}
+

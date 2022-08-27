@@ -1,0 +1,37 @@
+.form-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  .mat-form-field {
+    width: 48%;
+    &:nth-child(1) {
+      margin-right: 15px;
+    }
+  }
+}
+
+.file-area {
+  flex-direction: column;
+  align-items: center;
+
+  mat-card {
+    width: 70%;
+  }
+}
+
+.w-100 {
+  width: 98% !important;
+  margin-right: unset !important;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-row.last {
+  justify-content: flex-start;
+
+  .mat-form-field {
+    margin-left: 5px;
+  }
+}

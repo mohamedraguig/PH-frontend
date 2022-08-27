@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Fiche de sortie de {{ employee.nom }} {{ employee.prenom }}</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="list-view" [formGroup]="deleteForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Date de sortie</mat-label>
+            <input matInput [matDatepicker]="dateSortie" formControlName="dateSortie" required>
+            <mat-datepicker-toggle matSuffix [for]="dateSortie"></mat-datepicker-toggle>
+            <mat-datepicker #dateSortie></mat-datepicker>
+            <mat-error>La date de sortie est obligatoire</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Cause de sortie</mat-label>
+            <input matInput formControlName="causeSortie" required>
+            <mat-error>La cause de sortie est obligatoire</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Dernier jour travaillé</mat-label>
+            <input matInput [matDatepicker]="dernierJrTravaille" formControlName="dernierJrTravaille">
+            <mat-datepicker-toggle matSuffix [for]="dernierJrTravaille"></mat-datepicker-toggle>
+            <mat-datepicker #dernierJrTravaille></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <input matInput type="file" formControlName="pieceJointe" (change)="onFileChange($event)">
+            <mat-icon matSuffix>folder</mat-icon>
+        </mat-form-field>
+
+        <div class="file-upload-area">
+            <ng-container *ngIf="piecesJointes.length > 0">
+                <ng-container *ngFor="let pj of piecesJointes">
+                    <mat-card>
+                        <mat-card-content>
+                            <h3>{{ pj.name }}</h3>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <mat-icon (click)="enleverPJ(pj)">delete</mat-icon>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="confirmSortie()">Sauvegarder</button>
+    <button mat-raised-button mat-dialog-close color="accent">Fermer</button>
+</mat-dialog-actions>

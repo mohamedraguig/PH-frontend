@@ -1,0 +1,39 @@
+table {
+  width: 100%;
+  border-radius: 5em;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
+  justify-content: center;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#editbtn {
+  color: #4527A0;
+}
+
+#deletebtn {
+  color: #F44336;
+}
+
+#exitbtn {
+  color: #F44336;
+}
+
+#visibilitybtn {
+  color: #009688;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 12px !important;
+}
+
+#profile {
+  color: #F44336;
+}

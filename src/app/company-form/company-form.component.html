@@ -1,0 +1,82 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="company-form" [formGroup]="companyForm">
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Dénomination sociale</mat-label>
+                    <input matInput formControlName="nom" required>
+                    <mat-icon matSuffix>home</mat-icon>
+                    <mat-error>La Dénomination sociale de l'entreprise est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Numéro SIRET</mat-label>
+                    <input matInput formControlName="numSiret" required>
+                    <mat-icon matSuffix>local_offer</mat-icon>
+                    <mat-error>Le numéro SIRET de l'entreprise est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Adresse</mat-label>
+                    <textarea matInput formControlName="adresse"></textarea>
+                    <mat-error>L'adresse de l'entreprise est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="btn-actions">
+                <button mat-raised-button
+                        color="accent"
+                        (click)="clearForm()">
+                    <mat-icon>refresh</mat-icon>
+                    Réinitialiser
+                </button>
+                <button mat-raised-button
+                        color="primary"
+                        type="submit"
+                        (click)="saveCompany()"
+                        [disabled]="!this.companyForm.dirty || !this.companyForm.valid">
+                    <mat-icon>save</mat-icon>
+                    Sauvegarder
+                </button>
+            </div>
+        </div>
+
+        <div class="companies-table mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="nom">
+                    <th mat-header-cell *matHeaderCellDef>Dénomination Sociale</th>
+                    <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="numSIRET">
+                    <th mat-header-cell *matHeaderCellDef>Numéro SIRET</th>
+                    <td mat-cell *matCellDef="let element">{{ element.numSiret }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="adresse">
+                    <th mat-header-cell *matHeaderCellDef>Adresse</th>
+                    <td mat-cell *matCellDef="let element">{{ element.adresse }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button id="editbtn" matTooltip="Modifier {{element.nom}}" (click)="editCompany(element)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button id="deletebtn" matTooltip="Supprimer {{element.nom}}" (click)="deleteCompany(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </div>
+</div>

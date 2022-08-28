@@ -1,0 +1,200 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="employee-form" [formGroup]="empForm">
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="nom" required>
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-error>Le nom est obligatoire</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="prenom" required>
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-error>Le prénom est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Adresse</mat-label>
+                    <input matInput formControlName="adresse">
+                    <mat-icon matSuffix>home</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" required>
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                    <mat-error *ngIf="empForm.controls['email'].hasError('required')">L'email est obligatoire
+                    </mat-error>
+                    <mat-error *ngIf="empForm.controls['email'].hasError('email')">Veuillez saisir un email valide
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Date de naissance</mat-label>
+                    <input matInput [matDatepicker]="dateNaissance" formControlName="dateNaissance">
+                    <mat-datepicker-toggle matSuffix [for]="dateNaissance"></mat-datepicker-toggle>
+                    <mat-datepicker #dateNaissance></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>N° de tel</mat-label>
+                    <input type="tel" matInput formControlName="telephone" required>
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-error>Le téléphone est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>N° de sécurité sociale</mat-label>
+                    <input matInput formControlName="numSecuriteSociale" required>
+                    <mat-icon matSuffix>create</mat-icon>
+                    <mat-error *ngIf="empForm.controls['numSecuriteSociale'].hasError('required')">
+                        Le numéro de sécurité sociale est obligatoire
+                    </mat-error>
+                    <mat-error *ngIf="empForm.controls['numSecuriteSociale'].hasError('pattern')">
+                        Le numéro de sécurité sociale est incorrecte
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Nationalité</mat-label>
+                    <input
+                            type="text"
+                            placeholder="Choisir une nationalité"
+                            aria-label="Nationalité"
+                            matInput
+                            formControlName="nationalite"
+                            [matAutocomplete]="nationality"
+                            required>
+                    <mat-icon matSuffix>flag</mat-icon>
+                    <mat-autocomplete autoActiveFirstOption #nationality="matAutocomplete">
+                        <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                            {{country}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error>La nationalité est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Date d'embauche</mat-label>
+                    <input matInput [matDatepicker]="dateEmbauche" formControlName="dateEmbauche" required>
+                    <mat-datepicker-toggle matSuffix [for]="dateEmbauche"></mat-datepicker-toggle>
+                    <mat-datepicker #dateEmbauche></mat-datepicker>
+                    <mat-error>La date d'embauche est obligatoire</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Intitulé poste</mat-label>
+                    <input matInput formControlName="poste" required>
+                    <mat-icon matSuffix>work</mat-icon>
+                    <mat-error>L'intitulé du poste est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Taux horaire</mat-label>
+                    <input matInput formControlName="tauxHoraire" required>
+                    <mat-icon matSuffix>euro_symbol</mat-icon>
+                    <mat-error>Le taux horaire est obligatoire</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre d'heures</mat-label>
+                    <input matInput formControlName="nbrHeures" required>
+                    <mat-icon matSuffix>access_time</mat-icon>
+                    <mat-error>Le nombre d'heures est obligatoire</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Entreprise</mat-label>
+                    <mat-select formControlName="company" [compareWith]="compareCompanyObjects">
+                        <mat-option *ngFor="let company of companies" [value]="company">
+                            {{ company.nom }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Commentaire</mat-label>
+                    <textarea matInput placeholder="Ex. Nombre d'heures effectives..."
+                              formControlName="commentaire"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-checkbox formControlName="tempsPartiel" (change)="updatePartialTime()" class="partial-time">Temps
+                    partiel ?
+                </mat-checkbox>
+
+                <div class="mutuelle">
+                    <label id="mutuelle">Adhésion à la mutuelle ?</label>
+                    <mat-radio-group aria-labelledby="mutuelle" formControlName="mutuelle">
+                        <mat-radio-button value="true">Oui</mat-radio-button>
+                        <mat-radio-button value="false">Non</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <ng-container *ngIf="partialTime">
+                <mat-selection-list class="partial-time-list" formControlName="jrsSemaine">
+                    <mat-list-option *ngFor="let jr of weekDays" [value]="jr.name">
+                        {{jr.name}}
+                    </mat-list-option>
+                </mat-selection-list>
+            </ng-container>
+
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <input matInput type="file" formControlName="pieceJointe" (change)="onFileChange($event)">
+                    <mat-icon matSuffix>folder</mat-icon>
+                </mat-form-field>
+
+                <div class="file-upload-area">
+                    <ng-container *ngIf="piecesJointes.length > 0">
+                        <ng-container *ngFor="let pj of piecesJointes">
+                            <mat-card>
+                                <mat-card-content>
+                                    <h3>{{ pj.name }}</h3>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <mat-icon (click)="enleverPJ(pj)">delete</mat-icon>
+                                </mat-card-actions>
+                            </mat-card>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="btn-actions">
+                <button mat-raised-button
+                        color="accent"
+                        (click)="clearForm()">
+                    <mat-icon>refresh</mat-icon>
+                    Réinitialiser
+                </button>
+                <button mat-raised-button
+                        color="primary"
+                        type="submit"
+                        [disabled]="!this.empForm.dirty || !this.empForm.valid"
+                        (click)="submitForm()">
+                    <mat-icon>save</mat-icon>
+                    Sauvegarder
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

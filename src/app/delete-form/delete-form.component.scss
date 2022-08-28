@@ -1,0 +1,21 @@
+h2 {
+  text-align: center;
+}
+
+.file-upload-area {
+  display: flex;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.file-upload-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  mat-card {
+    width: 100%;
+  }
+}

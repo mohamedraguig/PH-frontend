@@ -1,0 +1,158 @@
+<h2 mat-dialog-title>Fiche personnelle de {{ employee.nom }} {{ employee.prenom }} </h2>
+<mat-dialog-content class="mat-typography">
+    <div class="list-view">
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input matInput readonly value="{{ employee.nom }}">
+                <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Prénom</mat-label>
+                <input matInput readonly value="{{ employee.prenom }}">
+                <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Adresse</mat-label>
+                <input matInput readonly value="{{ employee.adresse }}">
+                <mat-icon matSuffix>home</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput readonly value="{{ employee.email }}">
+                <mat-icon matSuffix>alternate_email</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Date de naissance</mat-label>
+                <input matInput readonly value="{{ employee.dateNaissance | date: 'dd/MM/yyyy'}}">
+                <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>N° de tel</mat-label>
+                <input matInput readonly value="{{ employee.telephone }}">
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>N° de sécurité sociale</mat-label>
+                <input matInput readonly value="{{ employee.numSecuriteSociale }}">
+                <mat-icon matSuffix>create</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Nationalité</mat-label>
+                <input matInput readonly value="{{ employee.nationalite }}">
+                <mat-icon matSuffix>flag</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Date d'embauche</mat-label>
+                <input matInput readonly value="{{ employee.dateEmbauche | date: 'dd/MM/yyyy'}}">
+                <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Intitulé poste</mat-label>
+                <input matInput readonly value="{{ employee.poste }}">
+                <mat-icon matSuffix>work</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Taux horaire</mat-label>
+                <input matInput readonly value="{{ employee.tauxHoraire }}">
+                <mat-icon matSuffix>euro_symbol</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre d'heures</mat-label>
+                <input matInput readonly value="{{ employee.nbrHeures }}">
+                <mat-icon matSuffix>access_time</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Temps Partiel</mat-label>
+                <input matInput readonly value="{{ employee.tempsPartiel ? 'Oui' : 'Non'}}">
+                <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Jours temps partiel</mat-label>
+                <input matInput readonly value="{{ employee.jrsSemaine?.toString() }}">
+                <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Adhèsion à la mutuelle</mat-label>
+                <input matInput readonly value="{{ employee.mutuelle ? 'Oui' : 'Non'}}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Entreprise</mat-label>
+                <input matInput readonly value="{{ employee.company ? employee.company.nom : 'Non affecté(e)' }}">
+                <mat-icon matSuffix>home</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Commentaire</mat-label>
+                <textarea matInput readonly value="{{employee.commentaire}}"></textarea>
+            </mat-form-field>
+        </div>
+
+        <ng-container *ngIf="!employee.actif">
+            <div class="form-row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Date de sortie</mat-label>
+                    <input matInput readonly value="{{ employee.dateSortie | date: 'dd/MM/yyyy'}}">
+                    <mat-icon matSuffix>calendar_today</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Cause de sortie</mat-label>
+                    <input matInput readonly value="{{ employee.causeSortie}}">
+                    <mat-icon matSuffix>receipt</mat-icon>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row last">
+                <mat-form-field appearance="fill">
+                    <mat-label>Dernier jour travaillé</mat-label>
+                    <input matInput readonly value="{{ employee.dernierJrTravaille | date: 'dd/MM/yyyy'}}">
+                    <mat-icon matSuffix>calendar_today</mat-icon>
+                </mat-form-field>
+            </div>
+        </ng-container>
+
+        <div class="form-row file-area">
+            <ng-container *ngFor="let pj of piecesJointes">
+                <mat-card>
+                    <mat-card-content>
+                        <h3>{{ pj.name }}</h3>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <mat-icon matTooltip="Télécharger" (click)="downloadPj(pj)">download</mat-icon>
+                    </mat-card-actions>
+                </mat-card>
+            </ng-container>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close cdkFocusInitial color="warn">Fermer</button>
+</mat-dialog-actions>

@@ -1,0 +1,36 @@
+// employee form
+.list-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+// piece jointe card
+.mat-card {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+
+  .mat-card-content,
+  .mat-card-actions {
+    margin-bottom: unset;
+  }
+
+  .mat-card-actions mat-icon {
+    cursor: pointer;
+    color: #F44336;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+

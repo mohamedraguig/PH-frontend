@@ -1,0 +1,76 @@
+.employee-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.form-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  .mat-form-field {
+    width: 30%;
+    &:nth-child(1) {
+      margin-right: 15px;
+    }
+  }
+  .mat-checkbox,
+  .file-upload-area {
+    width: 30%;
+  }
+}
+.mat-checkbox {
+  margin-top: 15px;
+}
+
+.partial-time-list {
+  .mat-checkbox {
+    margin-right: 15px;
+  }
+}
+.mat-selection-list {
+  display: flex;
+  width: 61%;
+  background-color: rgba(0,0,0,.04);
+  margin-bottom: 15px;
+}
+:host {
+  ::ng-deep {
+    .mat-list-item-content {
+      padding: 0 12px !important;
+    }
+  }
+}
+.mat-radio-button {
+  & ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+}
+.mutuelle {
+  display: flex;
+  width: 30%;
+  padding-top: 18px;
+  justify-content: space-between;
+}
+#mutuelle,
+.partial-time {
+  font-weight: bold;
+}
+.w-100 {
+  width: 61% !important;
+  margin-right: unset !important;
+}
+
+.btn-actions {
+  width: 61%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-actions button:nth-child(1) {
+  margin-right:10px;
+}
+
+

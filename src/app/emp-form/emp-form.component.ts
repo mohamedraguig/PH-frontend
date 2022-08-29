@@ -85,7 +85,7 @@ export class EmpFormComponent implements OnInit, OnDestroy {
       jrsSemaine: new FormControl(this.empToEdit ? this.empToEdit.jrsSemaine : []),
       pieceJointe: new FormControl([]),
       commentaire: new FormControl(this.empToEdit ? this.empToEdit.commentaire : ''),
-      company: new FormControl(this.empToEdit ? this.empToEdit.company : '')
+      company: new FormControl(this.empToEdit ? this.empToEdit.company : null)
     });
 
     // Nationality autocomplete value change event

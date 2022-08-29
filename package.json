@@ -4,14 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build",
+    "heroku-postbuild": "ng build --prod",
     "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && ng serve -o",
-    "postinstall": "ng build --aot -prod"
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && ng serve -o"
   },
   "engines": {
     "node": "14.15.5",
@@ -19,7 +18,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-material-components/file-input": "^7.0.1",
+    "@angular-material-components/file-input": "^8.0.0",
     "@angular/animations": "13.3.1",
     "@angular/cdk": "^13.3.1",
     "@angular/cli": "^13.3.1",
@@ -30,7 +29,7 @@
     "@angular/elements": "^13.3.1",
     "@angular/forms": "^13.3.1",
     "@angular/material": "13.3.1",
-    "@angular/material-moment-adapter": "^13.0.1",
+    "@angular/material-moment-adapter": "13.3.1",
     "@angular/platform-browser": "^13.3.1",
     "@angular/platform-browser-dynamic": "^13.3.1",
     "@angular/platform-server": "13.3.1",

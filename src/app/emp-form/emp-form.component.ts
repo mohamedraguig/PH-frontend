@@ -9,8 +9,6 @@ import {NotificationsComponent} from '../notifications/notifications.component';
 import {CompanyService} from '../services/company.service';
 import {Company} from '../models/company.model';
 
-
-
 @Component({
   selector: 'app-emp-form',
   templateUrl: './emp-form.component.html',
@@ -120,6 +118,7 @@ export class EmpFormComponent implements OnInit, OnDestroy {
     } else {
       // set emp id before updating
       this.employee.id = this.empToEdit.id;
+      console.log('piece jointe ', this.piecesJointes);
       this.empService.editEmp(this.employee, this.piecesJointes).subscribe(() => {
         this.notification.showNotification('success', 'Collaborateur modifié avec succès');
         // empty form and array of files

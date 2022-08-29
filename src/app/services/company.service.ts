@@ -10,7 +10,7 @@ import {environment} from '../../environments/environment';
 export class CompanyService {
 
   baseUrl = environment.baseUrl;
-  companyApiUrl = '/api/companies';
+  companyApiUrl = 'api/companies';
   constructor(private http: HttpClient) { }
 
   public saveCompany(company: Company): Observable<any> {

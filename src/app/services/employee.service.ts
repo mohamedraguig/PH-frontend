@@ -10,8 +10,8 @@ import {environment} from '../../environments/environment';
 export class EmployeeService {
 
   baseUrl = environment.baseUrl;
-  employeeApiUrl = '/api/employees';
-  pjApiUrl = '/api/pieces-jointes';
+  employeeApiUrl = 'api/employees';
+  pjApiUrl = 'api/pieces-jointes';
   private employeeSource = new BehaviorSubject<Employee>(null);
   employeeToEdit = this.employeeSource.asObservable();
 

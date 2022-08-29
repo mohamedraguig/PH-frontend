@@ -14,7 +14,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {EmpFormComponent} from '../../emp-form/emp-form.component';
 import {MatRadioModule} from '@angular/material/radio';
-import {NgxMatFileInputModule} from '@angular-material-components/file-input';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -57,7 +56,6 @@ const MY_DATE_FORMAT = {
         MatSelectModule,
         MatTooltipModule,
         MatRadioModule,
-        NgxMatFileInputModule,
         MatListModule,
         MatIconModule,
         MatDatepickerModule,

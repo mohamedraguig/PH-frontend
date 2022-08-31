@@ -46,7 +46,13 @@ td.mat-cell {
 
 th.mat-header-cell {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1.2em;
+  color: #4527A0;
+}
+
+td.mat-cell {
+  font-size: 1em;
+  font-weight: 500;
 }
 
 #editbtn {
@@ -63,5 +69,14 @@ th.mat-header-cell {
 
 ::ng-deep .mat-tooltip {
   font-size: 12px !important;
+}
+
+.reset-form-btn {
+  background-color: #26c6da;
+  color: white;
+}
+
+.search-input {
+  width: 30%;
 }
 

@@ -27,7 +27,7 @@
 
             <div class="btn-actions">
                 <button mat-raised-button
-                        color="accent"
+                        class="reset-form-btn"
                         (click)="clearForm()">
                     <mat-icon>refresh</mat-icon>
                     Réinitialiser
@@ -43,7 +43,13 @@
             </div>
         </div>
 
-        <div class="companies-table mat-elevation-z8">
+        <div class="companies-table">
+            <mat-form-field appearance="fill" class="search-input">
+                <mat-label>Recherche...</mat-label>
+                <input matInput (keyup)="search($event)">
+            </mat-form-field>
+        </div>
+        <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource">
                 <ng-container matColumnDef="nom">
                     <th mat-header-cell *matHeaderCellDef>Dénomination Sociale</th>

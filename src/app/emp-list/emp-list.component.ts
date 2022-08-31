@@ -10,6 +10,8 @@ import {DeleteConfirmDialogComponent} from '../delete-confirm-dialog/delete-conf
 import {NotificationsComponent} from '../notifications/notifications.component';
 import {DeleteFormComponent} from '../delete-form/delete-form.component';
 import {Router} from '@angular/router';
+import * as _ from 'lodash';
+import {CompanyService} from '../services/company.service';
 
 @Component({
   selector: 'app-emp-list',
@@ -22,20 +24,32 @@ export class EmpListComponent implements OnInit {
   dataSource = new MatTableDataSource<Employee>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  empToEdit: Employee;
+  employees: any = [];
+  companies: any = [];
 
   constructor(public empService: EmployeeService,
               public dialog: MatDialog,
               private notifications: NotificationsComponent,
-              private router: Router) { }
+              private router: Router,
+              private companyService: CompanyService) { }
 
   ngOnInit(): void {
     this.getAllEmployees();
+    this.getAllCompanies();
+  }
+
+  getAllCompanies() {
+    this.companyService.getAllCompanies().subscribe(companies => {
+      if (companies != null) {
+        this.companies = companies;
+      }
+    })
   }
 
   getAllEmployees() {
     this.empService.getAllEmployees().subscribe(employees => {
       if (employees != null) {
+        this.employees = employees;
         this.dataSource.data = employees;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -96,5 +110,40 @@ export class EmpListComponent implements OnInit {
         employee
       }
     });
+  }
+
+  search(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  applyFilter(event: Event) {
+
+  }
+
+  onStatusChange($event: any) {
+    const filterValue = $event.value;
+    if (filterValue == null) {
+      this.dataSource.data = this.employees;
+    } else {
+      this.dataSource.data = _.filter(this.employees, (item) => {
+          return item.actif == filterValue;
+      });
+    }
+  }
+
+  onCompanyChange($event: any) {
+    const filterValue = $event.value;
+    if (filterValue == null) {
+      this.dataSource.data = this.employees;
+    } else {
+      this.dataSource.data = _.filter(this.employees, (item) => {
+        return item.company?.nom.toLowerCase() == filterValue.toLowerCase();
+      });
+    }
   }
 }

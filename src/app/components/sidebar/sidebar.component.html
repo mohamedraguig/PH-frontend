@@ -1,9 +1,9 @@
 <div class="logo">
-    <a href="https://www.creative-tim.com" class="simple-text">
+    <a routerLink="/formulaire-entreprise" class="simple-text">
         <div class="logo-img">
-            <img src="/assets/img/angular2-logo-red.png"/>
+            <img src="/assets/img/logo.png"/>
         </div>
-        Pizza hut rh
+        GRH
     </a>
 </div>
 <div class="sidebar-wrapper">
@@ -58,7 +58,7 @@
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
+                <p class="menu-item-title">{{menuItem.title}}</p>
             </a>
         </li>
     </ul>

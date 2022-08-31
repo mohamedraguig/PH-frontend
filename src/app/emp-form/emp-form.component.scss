@@ -53,10 +53,12 @@
   padding-top: 18px;
   justify-content: space-between;
 }
+
 #mutuelle,
 .partial-time {
   font-weight: bold;
 }
+
 .w-100 {
   width: 61% !important;
   margin-right: unset !important;
@@ -71,6 +73,11 @@
 
 .btn-actions button:nth-child(1) {
   margin-right:10px;
+}
+
+.reset-form-btn {
+  background-color: #26c6da;
+  color: white;
 }
 
 

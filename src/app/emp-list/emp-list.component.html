@@ -1,5 +1,29 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div class="filter-container">
+            <mat-form-field appearance="fill" class="search-input">
+                <mat-label>Recherche...</mat-label>
+                <input matInput (keyup)="search($event)">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="status-filter">
+                <mat-label>Statut</mat-label>
+                <mat-select (selectionChange)="onStatusChange($event)" disableOptionCentering>
+                    <mat-option>Réinitialiser</mat-option>
+                    <mat-option [value]="true">Actif</mat-option>
+                    <mat-option [value]="false">Inactif</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="company-filter">
+                <mat-label>Entreprise</mat-label>
+                <mat-select (selectionChange)="onCompanyChange($event)" disableOptionCentering>
+                    <mat-option>Réinitialiser</mat-option>
+                    <mat-option *ngFor="let company of companies" [value]="company.nom">{{ company.nom }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
        <div class="mat-elevation-z8">
            <table mat-table [dataSource]="dataSource">
 

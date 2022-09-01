@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {map, Observable, startWith, Subscription} from 'rxjs';
+import {map, Observable, startWith, Subscription, filter, distinctUntilChanged, debounceTime, tap, switchMap} from 'rxjs';
 import {Employee} from '../models/employee.model';
 import {DatePipe} from '@angular/common';
 import {EmployeeService} from '../services/employee.service';
@@ -34,6 +34,9 @@ export class EmpFormComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editMode = false;
   companies = Company[0];
+  addresses : any[] = [];
+  filteredAddresses: any;
+  minLengthTerm = 3;
 
   constructor(public fb: FormBuilder,
               private datePipe: DatePipe,
@@ -88,6 +91,28 @@ export class EmpFormComponent implements OnInit, OnDestroy {
       company: new FormControl(this.empToEdit ? this.empToEdit.company : null)
     });
 
+    // Address autocomplete value change event
+    this.empForm.controls['adresse'].valueChanges
+        .pipe(
+            filter( value => {
+              return value !== null && value.length >= this.minLengthTerm
+            }),
+            distinctUntilChanged(),
+            debounceTime(1000),
+            tap(() => {
+              this.filteredAddresses = [];
+            }),
+            switchMap(value => this.empService.getAddress(value))
+        )
+        .subscribe((data: any) => {
+          if (Object.keys(data.features).length > 0) {
+            this.filteredAddresses = data.features.map((feature) => {
+              return feature.properties.label;
+            })
+          }
+        });
+
+
     // Nationality autocomplete value change event
     this.filteredCountries = this.empForm.controls['nationalite'].valueChanges
         .pipe(
@@ -120,7 +145,6 @@ export class EmpFormComponent implements OnInit, OnDestroy {
     } else {
       // set emp id before updating
       this.employee.id = this.empToEdit.id;
-      console.log('piece jointe ', this.piecesJointes);
       this.empService.editEmp(this.employee, this.piecesJointes).subscribe(() => {
         this.notification.showNotification('success', 'Collaborateur modifié avec succès');
         // empty form and array of files
@@ -158,4 +182,5 @@ export class EmpFormComponent implements OnInit, OnDestroy {
     this.partialTime = false;
     this.empForm.reset();
   }
+
 }

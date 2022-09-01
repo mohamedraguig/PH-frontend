@@ -20,7 +20,11 @@
             <div class="form-row">
                 <mat-form-field appearance="fill">
                     <mat-label>Adresse</mat-label>
-                    <textarea matInput formControlName="adresse"></textarea>
+                    <input matInput formControlName="adresse" [matAutocomplete]="address">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    <mat-autocomplete #address="matAutocomplete">
+                        <mat-option *ngFor="let address of filteredAddresses" [value]="address">{{ address }}</mat-option>
+                    </mat-autocomplete>
                     <mat-error>L'adresse de l'entreprise est obligatoire</mat-error>
                 </mat-form-field>
             </div>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Employee} from '../models/employee.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of, tap} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {PieceJointe} from '../models/piece-jointe.model';
 
@@ -13,8 +13,10 @@ export class EmployeeService {
   baseUrl = environment.baseUrl;
   employeeApiUrl = 'api/employees';
   pjApiUrl = 'api/pieces-jointes';
+  addressApiUrl = 'https://api-adresse.data.gouv.fr/search/';
   private employeeSource = new BehaviorSubject<Employee>(null);
   employeeToEdit = this.employeeSource.asObservable();
+  addresses = [];
 
   constructor(private http: HttpClient) { }
 
@@ -74,5 +76,10 @@ export class EmployeeService {
 
   public downloadPj(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${this.pjApiUrl}/${id}`, { responseType: 'blob'});
+  }
+
+  public getAddress(adresse: string): Observable<any> {
+    let params = new HttpParams().set('q', adresse);
+    return this.http.get<any>(`${this.addressApiUrl}`, { params: params })
   }
 }

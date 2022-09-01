@@ -19,8 +19,11 @@
             <div class="form-row">
                 <mat-form-field appearance="fill">
                     <mat-label>Adresse</mat-label>
-                    <input matInput formControlName="adresse">
-                    <mat-icon matSuffix>home</mat-icon>
+                    <input matInput formControlName="adresse" [matAutocomplete]="address">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    <mat-autocomplete #address="matAutocomplete">
+                        <mat-option *ngFor="let address of filteredAddresses" [value]="address">{{ address }}</mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>

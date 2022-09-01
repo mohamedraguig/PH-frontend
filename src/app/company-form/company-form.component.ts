@@ -9,6 +9,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import {DeleteConfirmDialogComponent} from '../delete-confirm-dialog/delete-confirm-dialog.component';
+import {debounceTime, distinctUntilChanged, filter, switchMap, tap} from 'rxjs';
 
 @Component({
   selector: 'app-company-form',
@@ -25,6 +26,8 @@ export class CompanyFormComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   editMode = false;
   companyToEditId : number;
+  filteredAddresses: any;
+  minLengthTerm = 3;
 
   constructor(private fb: FormBuilder,
               private companyService: CompanyService,
@@ -39,6 +42,27 @@ export class CompanyFormComponent implements OnInit {
       adresse: new FormControl('', Validators.required)
     });
     this.getAllCompanies();
+    // Address autocomplete value change event
+    this.companyForm.controls['adresse'].valueChanges
+        .pipe(
+           filter( value => {
+                 return value !== null && value.length >= this.minLengthTerm
+              }),
+           distinctUntilChanged(),
+           debounceTime(1000),
+           tap(() => {
+                this.filteredAddresses = [];
+           }),
+           switchMap(value => this.empService.getAddress(value))
+          )
+          .subscribe((data: any) => {
+              if (Object.keys(data.features).length > 0) {
+                  this.filteredAddresses = data.features.map((feature) => {
+                      return feature.properties.label;
+                  })
+              }
+       });
+
   }
 
   saveCompany() {

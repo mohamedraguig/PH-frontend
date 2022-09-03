@@ -21,7 +21,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {EmpListComponent} from '../../emp-list/emp-list.component';
 import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {ViewEmpDetailsComponent} from '../../view-emp-details/view-emp-details.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DeleteConfirmDialogComponent} from '../../delete-confirm-dialog/delete-confirm-dialog.component';
@@ -30,6 +30,7 @@ import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {MatCardModule} from '@angular/material/card';
 import {DeleteFormComponent} from '../../delete-form/delete-form.component';
 import {CompanyFormComponent} from '../../company-form/company-form.component';
+import {CustomMatTableConfig} from '../../services/custom-mat-table-config';
 
 const MY_DATE_FORMAT = {
     parse: {
@@ -84,6 +85,7 @@ const MY_DATE_FORMAT = {
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    { provide: MatPaginatorIntl, useValue: CustomMatTableConfig() },
     DatePipe,
     NotificationsComponent
   ],

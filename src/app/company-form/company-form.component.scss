@@ -80,3 +80,16 @@ td.mat-cell {
   width: 30%;
 }
 
+::ng-deep {
+  .company-form .mat-form-field .mat-form-field-flex,
+  .companies-table .mat-form-field .mat-form-field-flex {
+    background-color: white;
+  }
+}
+
+::ng-deep {
+  .company-form .mat-form-field-suffix .mat-icon,
+  .companies-table .mat-form-field-suffix .mat-icon {
+    color: #61a6c1;
+  }
+}

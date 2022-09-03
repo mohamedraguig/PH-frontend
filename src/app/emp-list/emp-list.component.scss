@@ -61,3 +61,13 @@ td.mat-cell {
   margin-left: 10px;
   width: 20%;
 }
+
+::ng-deep {
+  .mat-form-field .mat-form-field-flex {
+    background-color: white;
+  }
+}
+
+::ng-deep .mat-select-content{
+  font-size: 1em;
+}

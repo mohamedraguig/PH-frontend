@@ -4,6 +4,7 @@
             <mat-form-field appearance="fill" class="search-input">
                 <mat-label>Recherche...</mat-label>
                 <input matInput (keyup)="search($event)">
+                <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="status-filter">
@@ -67,7 +68,10 @@
                <ng-container matColumnDef="actions">
                    <th mat-header-cell *matHeaderCellDef>Actions</th>
                    <td mat-cell *matCellDef="let element">
-                       <button mat-icon-button id="editbtn" matTooltip="Modifier {{element.nom}}" (click)="editEmployee(element)">
+                       <button mat-icon-button id="editbtn"
+                               [disabled]="!element.actif"
+                               matTooltip="Modifier {{element.nom}}"
+                               (click)="editEmployee(element)">
                            <mat-icon>edit</mat-icon>
                        </button>
                        <button mat-icon-button id="deletebtn" matTooltip="Supprimer {{element.nom}}" (click)="deleteEmployee(element)">
@@ -89,7 +93,7 @@
                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
            </table>
 
-           <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons>
+           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
            </mat-paginator>
        </div>
     </div>

@@ -80,4 +80,21 @@
   color: white;
 }
 
+::ng-deep {
+  .employee-form .mat-form-field .mat-form-field-flex {
+    background-color: white;
+  }
+}
+
+::ng-deep {
+  .employee-form .mat-form-field-suffix .mat-icon {
+    color: #61a6c1;
+  }
+}
+
+mat-datepicker-toggle {
+  color: #61a6c1 !important;
+  margin-right: -7px;
+}
+
 
